@@ -3,7 +3,7 @@ import { Mic, ListTree, Share2, BookOpen, Check, MousePointer2 } from "lucide-re
 
 export function PathSection() {
   return (
-    <section className="w-full bg-moss-800 bg-topo py-24 md:py-32 px-6 relative overflow-hidden">
+    <section id="camino" className="w-full bg-moss-800 bg-topo py-24 md:py-32 px-6 relative overflow-hidden scroll-mt-20">
       <div className="max-w-[1400px] mx-auto flex flex-col items-center relative z-10 w-full">
         <h2 className="text-3xl md:text-5xl font-sans font-bold text-cream-150 mb-12 md:mb-16 text-center w-full">
           El camino para desenredar tu trámite

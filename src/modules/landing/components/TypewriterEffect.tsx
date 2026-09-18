@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const TYPEWRITER_TEXTS = [
+  "Tú disfruta tus nueces. Lardi trabaja... 🐿️",
   "Lardi está peleando con el papeleo... 🐿️",
   "Buscando dónde se escondió ese requisito...",
   "Descifrando la letra pequeña...",

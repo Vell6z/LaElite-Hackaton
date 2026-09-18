@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronRight, Play, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import { TypewriterEffect } from "./TypewriterEffect";
 
 export function HeroSection() {
@@ -9,30 +10,43 @@ export function HeroSection() {
 
         {/* Left Column - Text & CTA */}
         <div className="flex flex-col items-start space-y-8">
+
+
+
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-sans font-bold text-moss-600 leading-[1.1] tracking-tight">
             Tu ardilla <br />
             <span className="text-acorn-500 relative inline-block">
-              JURIDICA
+              JURÍDICA
               <div className="absolute -bottom-2 left-0 w-full h-3 bg-yellow-400/30 -rotate-1 rounded-full" />
             </span> de confianza
           </h1>
 
-          <p className="text-lg md:text-xl text-acorn-500/80 max-w-lg leading-relaxed">
-            Tú analiza las nueces, Lardi analiza tus trámites. 🐿️
+          <div className="space-y-4 max-w-lg">
+            <p className="text-xl md:text-2xl font-sans font-bold text-moss-700 leading-snug">
+              Tú disfruta tus nueces. Lardi se encarga del papeleo. 🌰
+            </p>
 
-            ¿Un documento que no entiendes? ¿Un trámite que parece no tener ni pies ni cabeza? ¿Mil papeles y cero idea de por dónde empezar? Tranqui, para eso está Lardi. Te ayudamos a entender lo que tienes entre manos, ordenar la información y saber qué sigue, para que puedas avanzar en tu trámite sin sentir que necesitas un abogado para entender el primer párrafo.
-          </p>
+            <p className="text-base md:text-lg text-acorn-600/90 leading-relaxed font-body">
+              ¿Un documento que no entiendes? ¿Un trámite que parece no tener ni pies ni cabeza? Tranqui, para eso está Lardi. Te ayudamos a desenredar la situación, organizar tus papeles y encontrar los pasos que puedes seguir, sin rodeos ni letra chiquita.
+            </p>
+          </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <button className="group bg-moss-500 hover:bg-moss-600 text-white text-lg font-medium px-8 py-4 rounded-2xl shadow-lg shadow-moss-500/20 transition-all hover:scale-[1.02] hover:shadow-xl flex items-center justify-center gap-3">
-              Cuéntale a Lardi
+          <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto">
+            <Link
+              to="/signup"
+              className="group bg-moss-500 hover:bg-moss-600 text-white text-lg font-medium px-8 py-4 rounded-2xl shadow-lg shadow-moss-500/20 transition-all hover:scale-[1.02] hover:shadow-xl flex items-center justify-center gap-3"
+            >
+              Cuéntale a Lardi 🐿️
               <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
 
-            <button className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-cream-200 hover:bg-cream-200/50 text-acorn-600 font-medium transition-colors border border-transparent hover:border-acorn-500/20">
+            <a
+              href="#historia"
+              className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-cream-200 hover:bg-cream-200/50 text-acorn-600 font-medium transition-colors border border-transparent hover:border-acorn-500/20"
+            >
               <Play className="w-5 h-5 fill-current" />
-              Ver el video
-            </button>
+              Conoce la historia
+            </a>
           </div>
         </div>
 
@@ -51,7 +65,7 @@ export function HeroSection() {
                 <div className="flex items-center justify-between border-b border-acorn-400/10 pb-2">
                   <div className="flex items-center gap-2 text-moss-600 text-sm font-semibold font-sans">
                     <Sparkles className="w-4 h-4 text-yellow-500" />
-                    <span>Lardi IA Peleando por tus derechos...</span>
+                    <span>Lardi IA Está En Eso... 🐿️</span>
                   </div>
                   <div className="flex gap-1">
                     <div className="w-2 h-2 rounded-full bg-acorn-400/40" />
@@ -73,9 +87,9 @@ export function HeroSection() {
 
               {/* Squirrel Image */}
               <img
-                src="https://instagram.feoh8-1.fna.fbcdn.net/v/t51.82787-15/620404657_18091082336477689_6156583094789273968_n.jpg?stp=dst-jpg_e35_p720x720_tt6&_nc_cat=101&ig_cache_key=MjUxMDU5NTU4NTAxNzEzOTc2Nw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=J5gdzoV0zQ8Q7kNvwEbng6_&_nc_oc=AdoJQI4b-TniH93_7iyrfxGLhR59dNgkzpwktr905DZiwEcvHAgzFbtiaVhQ9ZSdnWk&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.feoh8-1.fna&_nc_gid=ikp-P_bx9YXjMYEwISnQXA&_nc_ss=7a22e&oh=00_Af94zjtI0AQ3uyGcCASqoFeDflDjS1VKQiV_XuD7ptYw_Q&oe=6A3B2DB3"
-                alt="Lardi la ardilla"
-                className="w-64 h-64 object-cover object-center rounded-full shadow-2xl border-4 border-cream-100 z-10 animate-[spin_10s_linear_infinite]"
+                src="/LardiAbogado.jpeg"
+                alt="Lardi la ardilla jurídica"
+                className="w-64 h-64 object-cover object-center rounded-full shadow-2xl border-4 border-cream-100 z-10 transition-transform duration-500 hover:scale-105"
               />
             </div>
 
