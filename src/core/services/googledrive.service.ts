@@ -33,14 +33,20 @@ export class GoogleDriveService {
    */
   static async getAuthClient(userId: string): Promise<OAuth2Client> {
     const user = await User.findById(userId);
-    if (!user || !user.googleDriveInfo?.isLinked || !user.googleDriveInfo.refreshToken) {
+    if (!user || !user.googleDriveInfo?.isLinked) {
       throw new Error('Usuario no tiene Google Drive vinculado');
+    }
+
+    // Necesitamos al menos un refresh_token (para renovar) o un access_token vigente.
+    const { accessToken, refreshToken } = user.googleDriveInfo;
+    if (!refreshToken && !accessToken) {
+      throw new Error('No hay credenciales de Google Drive; vuelve a vincular tu cuenta');
     }
 
     const oAuth2Client = this.createOAuthClient();
     oAuth2Client.setCredentials({
-      access_token: user.googleDriveInfo.accessToken,
-      refresh_token: user.googleDriveInfo.refreshToken,
+      access_token: accessToken || undefined,
+      refresh_token: refreshToken || undefined,
     });
 
     // Handle token refresh automatically and save new access_token

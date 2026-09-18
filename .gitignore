@@ -19,6 +19,10 @@ server.js
 *.env
 !*.env.example
 
+# Google OAuth client secret files (NUNCA subir a git)
+client_secret*.json
+*client_secret*.json
+
 # Logs
 logs/
 *.log

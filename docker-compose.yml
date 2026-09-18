@@ -1,16 +1,21 @@
-version: '3.8'
-
 services:
   mongodb:
-    image: mongo:latest
+    image: mongo:7
     container_name: lapaginadelardi_mongodb
     ports:
       - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: adminpassword
+      MONGO_INITDB_DATABASE: lapaginadelardi
     volumes:
       - mongodb_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "-u", "admin", "-p", "adminpassword", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     restart: unless-stopped
 
   mongo-express:
@@ -25,7 +30,8 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: dev
       ME_CONFIG_BASICAUTH_PASSWORD: dev
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     restart: unless-stopped
 
 volumes:

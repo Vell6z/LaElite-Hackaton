@@ -23,10 +23,22 @@ router.post('/link', async (req: AuthRequest, res: Response): Promise<void> => {
 
     // Intercambiar código por tokens
     const tokens = await GoogleDriveService.exchangeCodeForTokens(code);
-    
+
+    // Google solo devuelve refresh_token la PRIMERA vez que el usuario da consentimiento.
+    // Si esta es una re-vinculación y no llega uno nuevo, conservamos el que ya teníamos.
+    const previousRefreshToken = user.googleDriveInfo?.refreshToken;
+    const refreshToken = tokens.refresh_token || previousRefreshToken || '';
+
+    if (!refreshToken) {
+      res.status(400).json({
+        message: 'Google no devolvió un refresh_token. Revoca el acceso de la app en tu cuenta de Google e intenta vincular de nuevo.'
+      });
+      return;
+    }
+
     user.googleDriveInfo = {
       accessToken: tokens.access_token || '',
-      refreshToken: tokens.refresh_token || '',
+      refreshToken,
       isLinked: true,
       linkedAt: new Date()
     };

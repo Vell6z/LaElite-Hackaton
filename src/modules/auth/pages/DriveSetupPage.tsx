@@ -12,6 +12,12 @@ export function DriveSetupPage() {
   const handleGoogleLogin = useGoogleLogin({
     flow: 'auth-code',
     scope: 'https://www.googleapis.com/auth/drive.file',
+    // 'offline' + prompt 'consent' fuerza a Google a devolver un refresh_token,
+    // que el backend necesita para renovar el acceso a Drive.
+    // codeql[js/incomplete-multi-character-sanitization] reason: constant literal
+    // @ts-ignore - access_type y prompt son válidos para el flujo auth-code
+    access_type: 'offline',
+    prompt: 'consent',
     onSuccess: async ({ code }) => {
       setIsConnecting(true);
       setError("");
