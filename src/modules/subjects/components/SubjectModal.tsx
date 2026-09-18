@@ -30,7 +30,7 @@ export function SubjectModal({
 
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-sans font-bold text-[#112613]">{editingSubjectId ? "Editar Asignatura" : "Nueva Asignatura"}</h2>
+            <h2 className="text-2xl font-sans font-bold text-[#112613]">{editingSubjectId ? "Editar Trámite" : "Nuevo Trámite"}</h2>
             <button 
               onClick={closeAndResetModal}
               className="text-[#112613]/40 hover:text-[#112613] p-1 transition-colors"
@@ -50,7 +50,7 @@ export function SubjectModal({
                 value={newSubject.name}
                 onChange={(e) => setNewSubject({...newSubject, name: e.target.value})}
                 className="w-full bg-transparent border-b border-[#112613]/20 py-2 text-[#112613] font-body outline-none transition-colors peer placeholder-transparent"
-                placeholder="Ej: Estructuras de Datos"
+                placeholder="Ej: Contrato de arrendamiento"
               />
               <label 
                 htmlFor="subjectName" 
@@ -59,7 +59,7 @@ export function SubjectModal({
                   ${newSubject.name ? '-top-4 text-xs font-bold text-[#112613]' : 'top-2 text-[#112613]/50'}
                 `}
               >
-                Nombre de la Materia
+                Nombre del Trámite
               </label>
               <div className={`absolute bottom-0 left-0 w-0 h-[2px] ${newSubject.color} transition-all duration-300 peer-focus:w-full`}></div>
             </div>
@@ -101,7 +101,7 @@ export function SubjectModal({
 
             {/* Academic Information Grid */}
             <div className="flex flex-col gap-5">
-              <h3 className="text-sm font-bold text-[#112613]/70 font-mono tracking-widest uppercase mt-2">Información Académica</h3>
+              <h3 className="text-sm font-bold text-[#112613]/70 font-mono tracking-widest uppercase mt-2">Detalles del Trámite</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Professor Input */}
@@ -112,7 +112,7 @@ export function SubjectModal({
                     value={newSubject.professor}
                     onChange={(e) => setNewSubject({...newSubject, professor: e.target.value})}
                     className="w-full bg-transparent border-b border-[#112613]/20 py-2 text-[#112613] font-body outline-none transition-colors peer placeholder-transparent"
-                    placeholder="Ej: Ing. Carlos Mendoza"
+                    placeholder="Ej: Inmobiliaria, empleador, EPS..."
                   />
                   <label 
                     htmlFor="professorName" 
@@ -121,7 +121,7 @@ export function SubjectModal({
                       ${newSubject.professor ? '-top-4 text-xs font-bold text-[#112613]' : 'top-2 text-[#112613]/50'}
                     `}
                   >
-                    Nombre del Profesor
+                    Entidad / Contraparte
                   </label>
                   <div className={`absolute bottom-0 left-0 w-0 h-[2px] ${newSubject.color} transition-all duration-300 peer-focus:w-full`}></div>
                 </div>
@@ -146,7 +146,7 @@ export function SubjectModal({
                       ${newSubject.semester ? '-top-4 text-xs font-bold text-[#112613]' : 'top-2 text-[#112613]/50'}
                     `}
                   >
-                    Semestre
+                    Prioridad (1-20)
                   </label>
                   <div className={`absolute bottom-0 left-0 w-0 h-[2px] ${newSubject.color} transition-all duration-300 peer-focus:w-full`}></div>
                 </div>
@@ -170,7 +170,7 @@ export function SubjectModal({
                 {isSubmitting ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
-                  editingSubjectId ? "Guardar Cambios" : "Crear Materia"
+                  editingSubjectId ? "Guardar Cambios" : "Crear Trámite"
                 )}
               </button>
             </div>

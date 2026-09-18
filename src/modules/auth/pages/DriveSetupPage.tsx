@@ -12,12 +12,8 @@ export function DriveSetupPage() {
   const handleGoogleLogin = useGoogleLogin({
     flow: 'auth-code',
     scope: 'https://www.googleapis.com/auth/drive.file',
-    // 'offline' + prompt 'consent' fuerza a Google a devolver un refresh_token,
-    // que el backend necesita para renovar el acceso a Drive.
-    // codeql[js/incomplete-multi-character-sanitization] reason: constant literal
-    // @ts-ignore - access_type y prompt son válidos para el flujo auth-code
-    access_type: 'offline',
-    prompt: 'consent',
+    // El flujo auth-code (popup) solicita acceso offline por defecto; el backend
+    // canjea el 'code' por access_token + refresh_token.
     onSuccess: async ({ code }) => {
       setIsConnecting(true);
       setError("");
@@ -37,12 +33,12 @@ export function DriveSetupPage() {
         // Éxito, redirigir al dashboard
         navigate('/dashboard');
       } catch (err: any) {
-        setError(err.message || 'Ocurrió un error al vincular tu cuenta');
+        setError(err.message || 'A Lardi se le enredó la conexión. Intentémoslo otra vez. 🐿️');
         setIsConnecting(false);
       }
     },
     onError: () => {
-      setError("La autenticación falló o fue cancelada");
+      setError("La conexión con Google se canceló o falló. Cuando quieras, lo volvemos a intentar.");
       setIsConnecting(false);
     }
   });
@@ -70,22 +66,22 @@ export function DriveSetupPage() {
 
           <div>
             <h1 className="text-3xl font-sans font-bold text-[#112613] tracking-tight mb-3">
-              Activa tu Almacenamiento
+              Prepara el nido para tus documentos 🐿️
             </h1>
             <p className="text-acorn-600 font-medium">
-              La Pagina de Lardi usa tu Google Drive personal para guardar todas tus materias, clases y archivos de forma segura. 
-              Sin Drive, no podrás continuar.
+              Lardi guarda tus documentos, requisitos y todo el papeleo de tus trámites en tu propio Google Drive.
+              Así todo queda ordenado en un solo lugar, seguro y bajo tu control.
             </p>
           </div>
 
           <div className="bg-acorn-50/50 border border-acorn-100 rounded-2xl p-5 text-left flex flex-col gap-3 my-2">
              <div className="flex items-start gap-3">
                 <ShieldCheck className="w-5 h-5 text-moss-600 shrink-0 mt-0.5" />
-                <p className="text-sm font-medium text-acorn-700">Solo accederemos a la carpeta <span className="font-bold">"LaPaginaDeLardi"</span> que crearemos. No podemos ver tus otros archivos.</p>
+                <p className="text-sm font-medium text-acorn-700">Lardi solo entra a la carpeta <span className="font-bold">"LaPaginaDeLardi"</span> que crea para ti. El resto de tus archivos ni los mira.</p>
              </div>
              <div className="flex items-start gap-3">
                 <Cloud className="w-5 h-5 text-moss-600 shrink-0 mt-0.5" />
-                <p className="text-sm font-medium text-acorn-700">Tus apuntes y videos consumirán espacio de tu propia cuota de Google Drive.</p>
+                <p className="text-sm font-medium text-acorn-700">Tus documentos viven en tu propio Drive, así que tú siempre tienes la última palabra sobre ellos.</p>
              </div>
           </div>
 
@@ -102,19 +98,19 @@ export function DriveSetupPage() {
           >
             {isConnecting ? (
               <span className="flex items-center gap-2">
-                Conectando <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                Lardi está armando el nido... 🐿️ <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
               </span>
             ) : (
               <>
                 <Cloud className="w-5 h-5" />
-                Vincular Google Drive
+                Conectar mi Google Drive
                 <ArrowRight className="w-4 h-4 ml-1" />
               </>
             )}
           </button>
           
           <p className="text-xs text-acorn-400 font-medium mt-2">
-            Al continuar aceptas que creemos carpetas en tu cuenta.
+            Al continuar, le das permiso a Lardi para crear su carpeta y guardar ahí tu papeleo. 🌰
           </p>
         </motion.div>
       </div>

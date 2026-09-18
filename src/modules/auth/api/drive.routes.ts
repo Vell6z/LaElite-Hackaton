@@ -1,4 +1,5 @@
 import { Router, Response } from 'express';
+import { Router, Response } from 'express';
 import { protect, AuthRequest } from '../../../core/middlewares/auth.middleware.js';
 import { User } from '../../../core/database/models/User.js';
 import { GoogleDriveService } from '../../../core/services/googledrive.service.js';
@@ -53,8 +54,13 @@ router.post('/link', async (req: AuthRequest, res: Response): Promise<void> => {
 
     res.json({ message: 'Google Drive vinculado exitosamente', rootFolderId });
   } catch (error: any) {
-    console.error('Error al vincular Drive:', error);
-    res.status(500).json({ message: 'Error al vincular con Google Drive' });
+    // Google devuelve el detalle en error.response.data (p.ej. redirect_uri_mismatch, invalid_grant)
+    const googleDetail = error?.response?.data || error?.message || error;
+    console.error('Error al vincular Drive:', googleDetail);
+    res.status(500).json({
+      message: 'Error al vincular con Google Drive',
+      detail: typeof googleDetail === 'string' ? googleDetail : (googleDetail?.error_description || googleDetail?.error || 'Error desconocido')
+    });
   }
 });
 

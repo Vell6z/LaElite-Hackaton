@@ -16,7 +16,7 @@ export function RecentClassesSection({ recentClassesData }: { recentClassesData:
   return (
     <section className="xl:col-span-1">
       <h2 className="text-xs font-mono uppercase tracking-widest text-[#112613]/50 font-bold mb-4">
-        Clases Recientes
+        Movimientos Recientes
       </h2>
       <div className="flex flex-col border-t border-acorn-400/20">
         {currentRecentClasses.map((activity, i) => (
@@ -35,14 +35,14 @@ export function RecentClassesSection({ recentClassesData }: { recentClassesData:
               <button 
                 onClick={() => navigate(`/materias/${activity.subjectId}/clase/${activity.id}`)}
                 className="p-2 text-acorn-500 hover:text-moss-600 hover:bg-moss-50 rounded-md transition-colors cursor-pointer" 
-                title="Ver Apunte"
+                title="Ver documento"
               >
                 <Eye className="w-4 h-4" />
               </button>
               <button 
                 onClick={() => navigate(`/materias/${activity.subjectId}/clase/${activity.id}`)}
                 className="p-2 text-acorn-500 hover:text-amber-600 hover:bg-amber-50 rounded-md transition-colors cursor-pointer" 
-                title="Editar Apunte"
+                title="Editar documento"
               >
                 <Edit3 className="w-4 h-4" />
               </button>

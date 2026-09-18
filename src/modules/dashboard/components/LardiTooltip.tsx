@@ -23,7 +23,7 @@ export function LardiTooltip() {
               <X className="w-3.5 h-3.5" />
             </button>
             <p className="text-sm font-medium text-[#112613] leading-relaxed pr-4">
-              ¿Necesitas ayuda para organizar esta semana? <a href="#" className="text-moss-600 font-bold underline decoration-moss-300 underline-offset-2 hover:text-moss-700 transition-colors">Click aquí</a> para ver recomendaciones de estudio.
+              ¿Tienes un trámite o documento que no entiendes? <a href="#" className="text-moss-600 font-bold underline decoration-moss-300 underline-offset-2 hover:text-moss-700 transition-colors">Cuéntame</a> qué pasó y lo desenredamos juntos. 🐿️
             </p>
           </div>
           <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-moss-100 flex items-center justify-center border-[3px] border-white shadow-lg shrink-0">

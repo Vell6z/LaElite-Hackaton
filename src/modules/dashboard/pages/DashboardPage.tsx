@@ -75,7 +75,7 @@ export function DashboardPage() {
               <div className="flex flex-col items-center gap-4 bg-white p-6 rounded-lg shadow-lg border border-moss-500/20">
                 <Loader2 className="w-8 h-8 animate-spin text-moss-600" />
                 <span className="font-sans font-bold tracking-widest text-sm animate-pulse text-[#112613]">
-                  Sincronizando...
+                  Lardi está ordenando el nido... 🐿️
                 </span>
               </div>
             </div>
@@ -84,13 +84,13 @@ export function DashboardPage() {
           <header className={`flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 transition-opacity duration-500 ${isLoading ? 'opacity-30' : 'opacity-100'}`}>
             <div>
               <h1 className="text-2xl md:text-3xl font-sans font-bold tracking-tight mb-2 text-[#112613]">
-                Hola, Juan. ¿Qué vamos a estructurar hoy?
+                Hola, Juan. ¿Qué enredo desenredamos hoy? 🐿️
               </h1>
-              <p className="text-acorn-600 font-medium">Es un buen día para dominar el conocimiento.</p>
+              <p className="text-acorn-600 font-medium">Tú cuéntale a Lardi qué pasó. El papeleo corre por su cuenta. 🌰</p>
             </div>
             <Link to="/materias" state={{ openNewSubjectModal: true }} className="flex items-center justify-center gap-2 bg-[#112613] hover:bg-moss-900 text-[#F9F6F0] px-6 py-3.5 rounded-md font-bold transition-all shadow-[4px_4px_0px_0px_rgba(74,103,65,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(74,103,65,0.3)] hover:translate-x-[2px] hover:translate-y-[2px] shrink-0 active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
               <Plus className="w-5 h-5" />
-              <span>Nueva Clase</span>
+              <span>Cuéntale a Lardi</span>
             </Link>
           </header>
 

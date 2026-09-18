@@ -53,28 +53,28 @@ export function SubjectCard({
                   onClick={(e) => { e.stopPropagation(); openEditModal(materia); }}
                 >
                   <PenTool className="w-4 h-4 text-[#112613]" />
-                  Editar materia
+                  Editar trámite
                 </button>
                 <button 
                   className="flex items-center gap-3 px-4 py-2.5 text-sm text-[#112613] hover:bg-acorn-50 transition-colors w-full text-left font-medium"
                   onClick={(e) => { e.stopPropagation(); toggleFavorite(materia.id); }}
                 >
                   <Heart className={`w-4 h-4 ${materia.isFavorite ? 'text-rose-500 fill-rose-500' : 'text-rose-500'}`} />
-                  {materia.isFavorite ? 'Quitar de favoritas' : 'Agregar a favoritas'}
+                  {materia.isFavorite ? 'Quitar de prioritarios' : 'Marcar como prioritario'}
                 </button>
                 <button 
                   className="flex items-center gap-3 px-4 py-2.5 text-sm text-[#112613] hover:bg-acorn-50 transition-colors w-full text-left font-medium"
                   onClick={(e) => { e.stopPropagation(); toggleArchive(materia.id); }}
                 >
                   <Archive className={`w-4 h-4 ${materia.isArchived ? 'text-acorn-500 fill-acorn-500' : 'text-acorn-500'}`} />
-                  {materia.isArchived ? 'Desarchivar materia' : 'Archivar materia'}
+                  {materia.isArchived ? 'Desarchivar trámite' : 'Archivar trámite'}
                 </button>
                 <button 
                   className="flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors w-full text-left font-medium"
                   onClick={(e) => { e.stopPropagation(); deleteSubject(materia.id); }}
                 >
                   <Trash2 className="w-4 h-4 text-red-600" />
-                  Borrar materia
+                  Borrar trámite
                 </button>
               </motion.div>
             )}
@@ -102,17 +102,17 @@ export function SubjectCard({
         {/* Subtitles */}
         <div className="flex flex-col gap-1 mt-auto mb-5">
           <p className="text-sm font-medium text-[#112613]/70 truncate">
-            Profesor: {materia.professor}
+            Entidad: {materia.professor}
           </p>
           <p className="text-xs font-medium text-[#112613]/50">
-            Semestre: {materia.semester}
+            Tipo: {materia.semester}
           </p>
         </div>
 
         {/* Progress Bar */}
         <div className="mt-auto">
           <div className="flex justify-between items-end mb-1.5">
-            <span className="text-xs font-bold text-moss-700">Progreso de Apuntes</span>
+            <span className="text-xs font-bold text-moss-700">Documentos recopilados</span>
             <span className="text-xs font-medium text-acorn-500">{materia.notesCount} / {materia.expectedNotes}</span>
           </div>
           <div className="w-full h-1.5 bg-acorn-100 rounded-full overflow-hidden">

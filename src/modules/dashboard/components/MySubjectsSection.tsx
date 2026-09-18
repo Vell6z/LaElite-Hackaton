@@ -9,10 +9,10 @@ export function MySubjectsSection({ materias }: { materias: any[] }) {
     <section className="xl:col-span-2">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xs font-mono uppercase tracking-widest text-[#112613]/50 font-bold">
-          Mis Materias
+          Mis Trámites
         </h2>
         <Link to="/materias" className="text-sm font-bold text-moss-600 hover:text-moss-800 transition-colors">
-          Ver todas &rarr;
+          Ver todos &rarr;
         </Link>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -27,7 +27,7 @@ export function MySubjectsSection({ materias }: { materias: any[] }) {
             </div>
             <h3 className="font-bold text-[#112613] text-sm leading-tight mb-1">{materia.name}</h3>
             <p className="text-xs text-acorn-500 font-medium bg-acorn-50 px-2 py-0.5 rounded-md mt-1 border border-acorn-400/10">
-              {materia.count} apuntes
+              {materia.count} documentos
             </p>
           </div>
         ))}

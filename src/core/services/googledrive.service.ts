@@ -1,4 +1,4 @@
-import { google, drive_v3 } from 'googleapis';
+import { google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
 import { User } from '../database/models/User.js';
 import stream from 'stream';

@@ -38,7 +38,7 @@ const initialMaterias = [
 ];
 
 export function SubjectsPage() {
-  usePageTitle("Mis Materias");
+  usePageTitle("Mis Trámites");
   const [materias, setMaterias] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -264,14 +264,14 @@ export function SubjectsPage() {
           <header className="flex flex-col gap-6 md:flex-row md:items-center justify-between mb-8">
             <div className="flex-1 max-w-xl">
               <h1 className="text-3xl font-sans font-bold tracking-tight mb-6 text-[#112613]">
-                Mis Materias
+                Mis Trámites
               </h1>
               
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#112613]/40" />
                 <input 
                   type="text" 
-                  placeholder="Buscar por materia o profesor..." 
+                  placeholder="Buscar por trámite o entidad..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-white border border-acorn-400/20 rounded-lg pl-12 pr-4 py-3.5 text-[#112613] font-body outline-none focus:border-moss-500 focus:ring-2 focus:ring-moss-500/20 transition-all shadow-sm"
@@ -284,7 +284,7 @@ export function SubjectsPage() {
               className="self-start md:self-end mt-2 md:mt-0 flex items-center justify-center gap-2 bg-transparent text-[#112613] border border-[#112613]/20 hover:border-[#112613] hover:bg-[#112613]/5 px-6 py-3 rounded-md font-bold transition-all shrink-0"
             >
               <Plus className="w-5 h-5" />
-              <span>Añadir Materia</span>
+              <span>Nuevo Trámite</span>
             </button>
           </header>
 
@@ -296,7 +296,7 @@ export function SubjectsPage() {
                 filter === 'current' ? 'bg-[#112613] text-[#F9F6F0]' : 'bg-white border border-acorn-400/20 text-[#112613] hover:bg-acorn-50'
               }`}
             >
-              Semestre Actual
+              En curso
             </button>
             <button 
               onClick={() => setFilter('favorites')}
@@ -304,7 +304,7 @@ export function SubjectsPage() {
                 filter === 'favorites' ? 'bg-[#112613] text-[#F9F6F0]' : 'bg-white border border-acorn-400/20 text-[#112613] hover:bg-acorn-50'
               }`}
             >
-              Mis Favoritas
+              Prioritarios
             </button>
             <button 
               onClick={() => setFilter('archived')}
@@ -312,7 +312,7 @@ export function SubjectsPage() {
                 filter === 'archived' ? 'bg-[#112613] text-[#F9F6F0]' : 'bg-white border border-acorn-400/20 text-[#112613] hover:bg-acorn-50'
               }`}
             >
-              Archivadas
+              Archivados
             </button>
           </div>
 
@@ -339,7 +339,7 @@ export function SubjectsPage() {
                 ))
               ) : (
                 <div className="col-span-full py-12 text-center">
-                  <p className="text-[#112613]/50 font-medium">No se encontraron materias que coincidan con la búsqueda.</p>
+                  <p className="text-[#112613]/50 font-medium">Lardi no encontró trámites que coincidan con tu búsqueda. 🐿️</p>
                 </div>
               )}
               </AnimatePresence>
@@ -381,8 +381,8 @@ export function SubjectsPage() {
                 <div className="w-12 h-12 rounded-full bg-red-50 text-red-500 flex items-center justify-center mb-4 mx-auto">
                   <AlertTriangle className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-center text-[#112613] mb-2 font-sans tracking-tight">¿Borrar esta materia?</h3>
-                <p className="text-acorn-500 text-sm text-center mb-6">Se borrarán todas las clases, apuntes y flashcards asociados. Esta acción no se puede deshacer.</p>
+                <h3 className="text-xl font-bold text-center text-[#112613] mb-2 font-sans tracking-tight">¿Borrar este trámite?</h3>
+                <p className="text-acorn-500 text-sm text-center mb-6">Se borrarán todos los documentos e información asociados a este trámite. Esta acción no se puede deshacer.</p>
                 
                 <div className="flex items-center gap-3">
                   <button 
