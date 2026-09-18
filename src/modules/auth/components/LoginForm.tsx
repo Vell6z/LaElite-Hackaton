@@ -56,27 +56,27 @@ export function LoginForm() {
 
       {/* Input: Correo */}
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-xs font-mono tracking-widest text-[#112613] font-bold">
-          &gt; [ IDENTIFICACIÓN ]
+        <label htmlFor="email" className="text-xs font-mono uppercase tracking-widest text-[#112613] font-bold">
+          Correo Electrónico
         </label>
         <input 
           type="email" 
           id="email" 
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full bg-transparent border-2 border-[#112613]/80 rounded-sm px-4 py-3 text-[#112613] font-mono outline-none focus:bg-[#112613]/5 transition-colors placeholder:text-[#112613]/30"
-          placeholder="estudiante@eafit.edu.co"
+          className="w-full bg-transparent border-2 border-acorn-700/30 rounded-sm px-4 py-3 text-[#112613] font-body outline-none focus:border-[#112613] transition-colors placeholder:text-[#112613]/30"
+          placeholder="ejemplo@correo.com"
         />
       </div>
 
       {/* Input: Contraseña */}
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-end">
-          <label htmlFor="password" className="text-xs font-mono tracking-widest text-[#112613] font-bold">
-            &gt; [ CLAVE ACCESO ]
+          <label htmlFor="password" className="text-xs font-mono uppercase tracking-widest text-[#112613] font-bold">
+            Contraseña
           </label>
-          <Link to="/recover" className="text-[10px] font-mono underline hover:text-amber-600 transition-colors text-[#112613]/70">
-            ¿Olvidaste tu llave? Recuperar acceso.
+          <Link to="/recover" className="text-xs font-mono underline hover:text-moss-600 transition-colors text-acorn-600">
+            ¿Olvidaste tu contraseña?
           </Link>
         </div>
         <input 
@@ -84,8 +84,8 @@ export function LoginForm() {
           id="password" 
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full bg-transparent border-2 border-[#112613]/80 rounded-sm px-4 py-3 text-[#112613] font-mono outline-none focus:bg-[#112613]/5 transition-colors placeholder:text-[#112613]/30"
-          placeholder="********"
+          className="w-full bg-transparent border-2 border-acorn-700/30 rounded-sm px-4 py-3 text-[#112613] font-body outline-none focus:border-[#112613] transition-colors placeholder:text-[#112613]/30"
+          placeholder="••••••••"
         />
       </div>
 
@@ -93,14 +93,14 @@ export function LoginForm() {
       <button 
         type="submit" 
         disabled={isLoading}
-        className="mt-6 w-full bg-[#112613] text-[#F9F6F0] font-mono font-bold uppercase tracking-wider py-4 rounded-sm transition-all duration-200 border-l-[6px] border-transparent hover:bg-black hover:border-amber-500 hover:text-amber-500 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:bg-[#112613] disabled:hover:border-transparent disabled:hover:text-[#F9F6F0]"
+        className="mt-6 w-full bg-[#112613] text-[#F9F6F0] font-sans font-bold py-4 rounded-sm transition-all duration-200 border-b-[4px] border-transparent hover:border-amber-500 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:border-transparent"
       >
         {isLoading ? (
           <>
             <Loader2 className="w-5 h-5 animate-spin" />
-            CONECTANDO...
+            Entrando al nido...
           </>
-        ) : "Entrar a la madriguera"}
+        ) : "Entrar a la madriguera jurídica"}
       </button>
 
     </form>
