@@ -15,7 +15,7 @@ export function DriveSetupPage() {
     // El flujo auth-code (popup) solicita acceso offline por defecto; el backend
     // canjea el 'code' por access_token + refresh_token.
     onSuccess: async ({ code }) => {
-      setIsConnecting(true);
+       setIsConnecting(true);
       setError("");
       try {
         const response = await fetch('http://localhost:5000/api/drive/link', {
