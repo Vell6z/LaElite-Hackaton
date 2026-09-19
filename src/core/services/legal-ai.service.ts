@@ -69,11 +69,12 @@ export interface ChatTurn {
 let client: GoogleGenAI | null = null;
 
 function getClient(): GoogleGenAI {
-  if (!GEMINI_API_KEY) {
+  const apiKey = process.env.GEMINI_API_KEY || GEMINI_API_KEY;
+  if (!apiKey) {
     throw new Error('GEMINI_API_KEY no está configurada en el .env');
   }
   if (!client) {
-    client = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+    client = new GoogleGenAI({ apiKey });
   }
   return client;
 }

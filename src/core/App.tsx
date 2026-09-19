@@ -16,6 +16,7 @@ import { SettingsPage } from "../modules/settings/SettingsPage";
 import { ProtectedRoute } from "../modules/auth/components/ProtectedRoute";
 import { DriveSetupPage } from "../modules/auth/pages/DriveSetupPage";
 import { MobileRecordPage } from "../modules/subjects/pages/MobileRecordPage";
+import { ConsultarPage } from "../modules/consultas/pages/ConsultarPage";
 import { LoadingScreen } from "../shared/ui/LoadingScreen";
 import { AnimatePresence } from "motion/react";
 
@@ -40,6 +41,7 @@ export default function App() {
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/consultar" element={<ConsultarPage />} />
             <Route path="/setup-drive" element={<DriveSetupPage />} />
             <Route path="/materias" element={<SubjectsPage />} />
             <Route path="/materias/:id" element={<SubjectDetailPage />} />

@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   Squirrel, Home, Library, Calendar, 
-  ChevronLeft, ChevronRight, Brain, LogOut, Loader2
+  ChevronLeft, ChevronRight, LogOut, Loader2, MessageSquareText
 } from "lucide-react";
 import React, { useState } from "react";
 
@@ -51,9 +51,9 @@ export function Sidebar() {
         {/* Nav Links */}
         <nav className="flex flex-col gap-2">
           <NavItem to="/dashboard" icon={<Home className="w-5 h-5" />} label="Inicio" isSidebarOpen={isSidebarOpen} active={location.pathname === '/dashboard'} />
-          <NavItem to="/materias" icon={<Library className="w-5 h-5" />} label="Mis Materias" isSidebarOpen={isSidebarOpen} active={location.pathname === '/materias'} />
+          <NavItem to="/consultar" icon={<MessageSquareText className="w-5 h-5" />} label="Cuéntale a Lardi" isSidebarOpen={isSidebarOpen} active={location.pathname === '/consultar'} />
+          <NavItem to="/materias" icon={<Library className="w-5 h-5" />} label="Mis Trámites" isSidebarOpen={isSidebarOpen} active={location.pathname === '/materias'} />
           <NavItem to="/calendario" icon={<Calendar className="w-5 h-5" />} label="Calendario" isSidebarOpen={isSidebarOpen} active={location.pathname === '/calendario'} />
-          <NavItem to="/repaso" icon={<Brain className="w-5 h-5" />} label="Repaso Activo" isSidebarOpen={isSidebarOpen} active={location.pathname === '/repaso'} />
         </nav>
       </div>
 
