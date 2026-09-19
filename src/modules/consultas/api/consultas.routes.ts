@@ -61,7 +61,13 @@ router.post('/', async (req: AuthRequest, res: Response): Promise<void> => {
 
     res.json({ reply, disclaimer: LEGAL_DISCLAIMER });
   } catch (error: any) {
-    console.error('Error en consulta legal:', error?.message || error);
+    // Log detallado para diagnóstico (nombre, mensaje y status del error de Gemini).
+    console.error('Error en consulta legal:', {
+      name: error?.name,
+      message: error?.message,
+      status: error?.status,
+      stack: error?.stack?.split('\n').slice(0, 3).join(' | '),
+    });
 
     // Si falta la API key, dar un mensaje claro para configurarla.
     if (typeof error?.message === 'string' && error.message.includes('GEMINI_API_KEY')) {
@@ -71,7 +77,9 @@ router.post('/', async (req: AuthRequest, res: Response): Promise<void> => {
       return;
     }
 
-    res.status(500).json({ message: 'A Lardi se le enredó el análisis. Intenta de nuevo en un momento. 🐿️' });
+    res.status(500).json({
+      message: 'A Lardi se le enredó el análisis. Intenta de nuevo en un momento. 🐿️',
+    });
   }
 });
 

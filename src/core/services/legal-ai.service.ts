@@ -28,8 +28,10 @@ function resolveApiKey(): string | undefined {
   return undefined;
 }
 
-// El modelo Flash es rápido y económico, ideal para un chat de orientación.
-const MODEL = 'gemini-flash-latest';
+// Modelos a intentar, en orden. Si el primero está saturado (503/UNAVAILABLE)
+// o no disponible, se prueba el siguiente. Esta cuenta usa la familia Gemini 3.x
+// (según la respuesta de la API), con -latest como respaldo.
+const MODELS = ['gemini-flash-latest', 'gemini-3.6-flash', 'gemini-2.0-flash'];
 
 /**
  * System prompt que define la personalidad y las reglas de Lardi, el asesor
@@ -115,9 +117,16 @@ function getClient(): GoogleGenAI {
 export async function askLardi(history: ChatTurn[], message: string): Promise<string> {
   const ai = getClient();
 
+  // Gemini exige que el historial empiece con un turno 'user'. Descartamos
+  // cualquier turno 'model' que quede al inicio (p.ej. el saludo de bienvenida).
+  const safeHistory = [...history];
+  while (safeHistory.length > 0 && safeHistory[0].role !== 'user') {
+    safeHistory.shift();
+  }
+
   // Construir el arreglo de contenidos con roles para dar contexto multi-turno.
   const contents = [
-    ...history.map((turn) => ({
+    ...safeHistory.map((turn) => ({
       role: turn.role,
       parts: [{ text: turn.text }],
     })),
@@ -127,18 +136,42 @@ export async function askLardi(history: ChatTurn[], message: string): Promise<st
     },
   ];
 
-  const response = await ai.models.generateContent({
-    model: MODEL,
-    contents,
-    config: {
-      systemInstruction: SYSTEM_INSTRUCTION,
-      temperature: 0.4,
-    },
-  });
+  const config = {
+    systemInstruction: SYSTEM_INSTRUCTION,
+    temperature: 0.4,
+  };
 
-  const text = response.text;
-  if (!text) {
-    throw new Error('La IA no devolvió una respuesta');
+  let lastError: any;
+
+  // Recorremos los modelos; para cada uno reintentamos ante errores temporales
+  // (503 UNAVAILABLE / 429 sobrecarga) con una pequeña espera creciente.
+  for (const model of MODELS) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const response = await ai.models.generateContent({ model, contents, config });
+        const text = response.text;
+        if (text && text.trim()) {
+          return text;
+        }
+        lastError = new Error('La IA no devolvió una respuesta');
+      } catch (err: any) {
+        lastError = err;
+        const status = err?.status ?? err?.code;
+        const msg = String(err?.message || '');
+        const isTransient =
+          status === 503 ||
+          status === 429 ||
+          /UNAVAILABLE|overloaded|high demand|RESOURCE_EXHAUSTED/i.test(msg);
+
+        // Si el error NO es temporal (p.ej. modelo inexistente, auth), pasar al
+        // siguiente modelo sin reintentar este.
+        if (!isTransient) break;
+
+        // Espera creciente antes de reintentar: 500ms, 1000ms, 1500ms.
+        await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+      }
+    }
   }
-  return text;
+
+  throw lastError || new Error('La IA no devolvió una respuesta');
 }
