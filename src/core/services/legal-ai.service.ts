@@ -1,6 +1,32 @@
 import { GoogleGenAI } from '@google/genai';
+import fs from 'fs';
+import path from 'path';
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+/**
+ * Lee la GEMINI_API_KEY de forma robusta. Primero intenta process.env (cargado
+ * por dotenv al arrancar). Si no está —por ejemplo, si el proceso arrancó antes
+ * de que la clave se agregara al .env— la lee directamente del archivo .env.
+ */
+function resolveApiKey(): string | undefined {
+  if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim()) {
+    return process.env.GEMINI_API_KEY.trim();
+  }
+  try {
+    const envPath = path.resolve(process.cwd(), '.env');
+    const raw = fs.readFileSync(envPath, 'utf-8');
+    const match = raw.match(/^\s*GEMINI_API_KEY\s*=\s*(.+)\s*$/m);
+    if (match) {
+      const value = match[1].trim().replace(/^["']|["']$/g, '');
+      if (value) {
+        process.env.GEMINI_API_KEY = value; // cachear para llamadas siguientes
+        return value;
+      }
+    }
+  } catch {
+    // Ignorar: si no se puede leer el archivo, devolvemos undefined abajo.
+  }
+  return undefined;
+}
 
 // El modelo Flash es rápido y económico, ideal para un chat de orientación.
 const MODEL = 'gemini-flash-latest';
@@ -69,7 +95,7 @@ export interface ChatTurn {
 let client: GoogleGenAI | null = null;
 
 function getClient(): GoogleGenAI {
-  const apiKey = process.env.GEMINI_API_KEY || GEMINI_API_KEY;
+  const apiKey = resolveApiKey();
   if (!apiKey) {
     throw new Error('GEMINI_API_KEY no está configurada en el .env');
   }
