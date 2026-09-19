@@ -10,6 +10,7 @@ import subjectsRoutes from './modules/subjects/api/subjects.routes.js';
 import globalSessionsRoutes from './modules/subjects/api/globalSessions.routes.js';
 import remindersRoutes from './modules/calendar/api/reminders.routes.js';
 import driveRoutes from './modules/auth/api/drive.routes.js';
+import consultasRoutes from './modules/consultas/api/consultas.routes.js';
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/api/drive', driveRoutes);
 app.use('/api/subjects', subjectsRoutes);
 app.use('/api/sessions', globalSessionsRoutes);
 app.use('/api/reminders', remindersRoutes);
+app.use('/api/consultas', consultasRoutes);
 
 const PORT = process.env.PORT || 5000;
 
